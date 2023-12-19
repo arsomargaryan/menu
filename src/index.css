@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h6 {
+    font-weight: 500;
+    color: black;
+}
+
+.forShadow{
+    @apply shadow-md border border-gray-100 border-b-gray-400
+}
+
+.forText{
+    @apply font-bold text-gray-700 hover:underline
+}
+
+.active{
+    color: red !important;
+}
+.strong{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.url{
+    color: blue;
+    text-decoration: underline;
+}
+
+
+.checkbox{
+    display: none;
+}
+
+
+
+.label::before{
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid black;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 10px;
+    box-shadow: 0px 0px 1px black;
+
+}
+
+.checkbox:checked + .label::before{
+    background-image: url("images/checkbox.png");
+    border: none;
+    background-size: contain;
+    transition: .2s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
