@@ -8,14 +8,14 @@ import {AboutUsPage} from "./Pages/AboutUsPage";
 import {ContactUsPage} from "./Pages/ContactUsPage";
 import {CareersPage} from "./Pages/CareersPage";
 import {TermsAndConditionsPage} from "./Pages/TermsAndConditionsPage";
-import {RestaurantMealList} from "./RestaurantsComponents/Meals/RestaurantMealList";
-import {ShopMealList} from "./ShopComponents/Meals/ShopMealList";
 import {NotFoundPage} from "./Pages/NotFoundPage";
 import {useEffect} from "react";
 import {ForSignLayout} from "./Components/ForSignLayout";
 import {SignInPage} from "./Pages/SignInPage";
 import {SignUpPage} from "./Pages/SignUpPage";
 import {FalsePage} from "./Pages/FalsePage";
+import {RestaurantMealPage} from "./Pages/RestaurantMealPage";
+import {ShopMealPage} from "./Pages/ShopMealPage";
 
 export function App(){
     const location = useLocation();
@@ -36,8 +36,8 @@ export function App(){
                 <Route path={'/contact-us'} element={<ContactUsPage/>} />
                 <Route path={'/careers'} element={<CareersPage />} />
                 <Route path={'/terms-and-conditions'} element={<TermsAndConditionsPage />} />
-                <Route path={'/restaurant/:name'} element={<RestaurantMealList />} />
-                <Route path={'/shop/:name'} element={<ShopMealList />} />
+                <Route path={'/restaurant/:name'} element={<RestaurantMealPage/>} />
+                <Route path={'/shop/:name'} element={<ShopMealPage />} />
                 <Route path={'/reset/false'} element={<FalsePage />} />
 
 

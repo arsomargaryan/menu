@@ -1,4 +1,3 @@
-import {Routes, Route, useLocation } from "react-router-dom";
 import {getAllRestaurants} from "../api";
 import {useState, useEffect, useMemo} from "react";
 import {RestaurantsList} from "../RestaurantsComponents/RestaurantsList";
@@ -28,10 +27,8 @@ export function HomePage() {
         })
     }, [filters, restaurants]);
 
-
-
     useEffect(() => {
-        getAllRestaurants().then(data => {
+        getAllRestaurants("restaurants",null, null).then(data=>{
             setRestaurants(data)
         })
     }, []);
