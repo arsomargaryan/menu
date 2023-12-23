@@ -16,6 +16,7 @@ import {SignUpPage} from "./Pages/SignUpPage";
 import {FalsePage} from "./Pages/FalsePage";
 import {RestaurantMealPage} from "./Pages/RestaurantMealPage";
 import {ShopMealPage} from "./Pages/ShopMealPage";
+import {NewsPage} from "./Pages/NewsPage";
 
 export function App(){
     const location = useLocation();
@@ -39,6 +40,7 @@ export function App(){
                 <Route path={'/restaurant/:name'} element={<RestaurantMealPage/>} />
                 <Route path={'/shop/:name'} element={<ShopMealPage />} />
                 <Route path={'/reset/false'} element={<FalsePage />} />
+                <Route path={'/news'} element={<NewsPage />} />
 
 
                 <Route path={'*'} element={<NotFoundPage />} />

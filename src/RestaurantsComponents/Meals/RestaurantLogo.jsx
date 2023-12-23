@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 export function RestaurantLogo({item}){
@@ -7,7 +7,7 @@ export function RestaurantLogo({item}){
 
 
 
-    return <div className={' rounded-xl shadow-md  border border-gray-100'}>
+    return <div className={' rounded-xl shadow-md  border border-gray-100 forShadow'}>
         <div className={'w-[355px]'}>
             <img src={item.logo} alt={"nkar"}
                  className={'rounded-t-xl cursor-pointer  w-full object-contain'}

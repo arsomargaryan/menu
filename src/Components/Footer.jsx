@@ -23,7 +23,7 @@ export function Footer(){
                 <h6>Կազմակերպություն</h6>
                 <ul>
                     <div><Link to={'/about-us'}> <li>Մեր մասին</li> </Link></div>
-                    <div><li>Նորություններ</li></div>
+                    <div><Link to={'/news'}> <li>Նորություններ</li> </Link></div>
                     <div><Link to={'/careers'}>Աշխատանք</Link></div>
                     <div><Link to={'/contact-us'}>Հետադարձ կապ</Link></div>
                 </ul>

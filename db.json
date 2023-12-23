@@ -1149,7 +1149,7 @@
               "id": 3,
               "title": "Կոկա-Կոլա",
               "price": 300,
-              "image" : "https://menu.am/resources/default/img/restaurant_products/big/1697627441907-983.jpg",
+              "image" : "https://menu.am/resources/default/img/restaurant_products/big/1679040025281-983.jpg",
               "composition" : ""
             },
             {
@@ -2994,7 +2994,7 @@
               "id": 1,
               "title": "Զաթարով Հաց",
               "price": 1800,
-              "image": "230գ, զաթար,լոլիկ, սոխ լոշիկի վրա",
+              "image": "https://menu.am/resources/default/img/restaurant_products/big/1678531160192-2449.jpg",
               "composition": "230գ, զաթար,լոլիկ, սոխ լոշիկի վրա"
             },
             {
@@ -9481,7 +9481,7 @@
             },
             {
               "id": 5,
-              "category": "Պանիր",
+              "title": "Շվեյցարական Ալպիական Պանիր",
               "price": 2900,
               "image" : "https://menu.am/resources/default/img/restaurant_products/big/1694096726316-1394.jpg",
               "composition" : "100գ, յուղայնությունը 60%, Շվեյցարիա, կիսապինդ առաձգական պանիր"

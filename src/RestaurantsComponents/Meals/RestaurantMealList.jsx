@@ -1,22 +1,10 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getAllMeals} from "../../api";
+import {RestaurantMealItem} from "./RestaurantMealItem";
 
-export function RestaurantMealList(){
-
-    const [mealsList, setMealsList] = useState([]);
-    const [logo, setLogo] = useState('')
-    const {name} = useParams();
-
-    useEffect(() => {
-        getAllMeals(name).then((data)=>{
-            setMealsList(data.meals)
-            setLogo(data.logo)
-        })
-    }, []);
-
+export function RestaurantMealList({meals}){
 
     return <div>
-
+        {
+            meals.map((el , index)=><RestaurantMealItem key={index} item={el} />)
+        }
     </div>
 }

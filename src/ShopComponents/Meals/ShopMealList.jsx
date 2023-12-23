@@ -1,11 +1,13 @@
-import {Banner} from "../../Components/Banner";
+import {ShopMealItem} from "./ShopMealItem";
 
-export function ShopMealList(){
+export function ShopMealList({meals}){
 
 
 
 
     return <div>
-        <Banner />
+        {
+            meals.map((el , index)=><ShopMealItem key={index} item={el} />)
+        }
     </div>
 }

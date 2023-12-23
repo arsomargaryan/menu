@@ -1,4 +1,3 @@
-import {RestaurantsItem} from "../RestaurantsComponents/RestaurantsItem";
 import {ShopItem} from "./ShopItem";
 
 
