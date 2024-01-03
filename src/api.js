@@ -1,14 +1,7 @@
 import axios from "axios";
 
-// async function getAllRestaurants(){
-//     const response = await axios.get('http://localhost:3000/restaurants')
-//     return response.data
-// }
 
-async function getAllShop(){
-    const response = await  axios.get('http://localhost:3000/shop')
-    return response.data
-}
+
 
 async function getAllRestaurants(category, name, query, endpoint ='http://localhost:3000'){
     try{
@@ -29,4 +22,4 @@ async function getAllRestaurants(category, name, query, endpoint ='http://localh
 
 
 
-export {getAllRestaurants, getAllShop, }
+export {getAllRestaurants}

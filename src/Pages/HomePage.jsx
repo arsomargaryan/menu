@@ -62,7 +62,7 @@ export function HomePage() {
             <div className={'ml-7'}>
                 <Search searchFunc={searchFunc} />
                 <HasFilter filters={filters}/>
-                <RestaurantsList restaurants={filteredRestaurants}/>
+                <RestaurantsList restaurants={filteredBySearch.length > 0 ? filteredBySearch : filteredRestaurants}/>
             </div>
         </div>
     </div>

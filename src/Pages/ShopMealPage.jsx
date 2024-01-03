@@ -42,6 +42,8 @@ export function ShopMealPage(){
 
     },[chapter, meals])
 
+    const infoArr = [item.logo, item.shopName, "shop", item.shopAPI]
+
     return <div>
         <Banner />
         <div className={'flex ml-6 mt-10'}>
@@ -50,7 +52,7 @@ export function ShopMealPage(){
                 <ShopChapterMeals meals={meals} chapterCheckFunc={chapterCheckFunc} chapter={chapter} />
             </div>
             <div  className={'ml-7'}>
-                <ShopMealList  meals={filteredMeals}/>
+                <ShopMealList  meals={filteredMeals} infoArr={infoArr}/>
             </div>
         </div>
     </div>

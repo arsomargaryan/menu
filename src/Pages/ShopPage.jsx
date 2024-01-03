@@ -1,9 +1,8 @@
 import {useEffect, useMemo, useState} from "react";
-import {getAllRestaurants, getAllShop} from "../api";
+import {getAllRestaurants} from "../api";
 import {Category} from "../Components/Category";
 import {PropertyFilterShop} from "../ShopComponents/Filter/PropertyFilterShop";
 import {ShopList} from "../ShopComponents/ShopList";
-import banner from "../images/banner.png";
 import {Banner} from "../Components/Banner";
 import {Search} from "../Components/Search";
 import {HasFilter} from "../Components/HasFilter";
@@ -15,7 +14,7 @@ export function ShopPage(){
     const [filteredBySearch, setFilteredBySearch] = useState([])
 
     useEffect(() => {
-        getAllShop().then(data=>{
+        getAllRestaurants("shop",null, null).then(data=>{
             setShop(data)
         })
     }, []);
@@ -61,7 +60,7 @@ export function ShopPage(){
             <div className={'ml-7'}>
                 <Search searchFunc={searchFunc} />
                 <HasFilter filters={filters}/>
-                <ShopList shop={filteredShop} />
+                <ShopList shop={filteredBySearch.length>0?filteredBySearch : filteredShop} />
             </div>
         </div>
     </div>

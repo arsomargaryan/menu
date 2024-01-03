@@ -46,6 +46,8 @@ export function RestaurantMealPage(){
 
     },[chapter, meals])
 
+    const infoArr = [item.logo, item.restaurantName, "restaurant", item.restaurantAPI]
+
 
     return <div>
         <Banner />
@@ -55,7 +57,7 @@ export function RestaurantMealPage(){
                 <RestaurantChapterMeals meals={meals} chapterCheckFunc={chapterCheckFunc} chapter={chapter}/>
             </div>
             <div  className={'ml-7'}>
-                <RestaurantMealList meals={filteredMeals} />
+                <RestaurantMealList meals={filteredMeals} infoArr={infoArr}/>
             </div>
         </div>
 

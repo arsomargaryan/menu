@@ -16,7 +16,7 @@ export function RestaurantLogo({item}){
         <div className={'m-4'}>
             <div className={'flex justify-between mb-3 cursor-pointer'}>
                 <div onClick={() => navigate(0)}>
-                    <div className={'forText text-sm    '}>{item.restaurantName}</div>
+                    <div className={'forText text-sm'}>{item.restaurantName}</div>
                 </div>
                 <div><span><i className="fa-solid fa-star mr-1 text-red-600"></i></span>{item.restaurantRating}</div>
             </div>
