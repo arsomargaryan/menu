@@ -6,7 +6,7 @@ import AppContext from "../AppContext";
 export function Meal({item, infoArr}){
 
     const [showModal, setShowModal] = useState(false)
-    const {clickHandler, favorites} = useContext(AppContext)
+    const {onFavorite, favorites, addBasket} = useContext(AppContext)
     const [isFavorite, setIsFavorite] = useState(false)
     useEffect(() => {
         favorites.map(el=>{
@@ -26,7 +26,7 @@ export function Meal({item, infoArr}){
 
 
     return <div className={'rounded-xl  border border-gray-100 cursor-pointer forShadow w-[250px] mb-4'}>
-        {showModal && <Modal setShowModal={setShowModal} item={item} infoArr={infoArr} isFavorite={isFavorite} clickHandler={clickHandler} setIsFavorite={setIsFavorite}/>}
+        {showModal && <Modal setShowModal={setShowModal} item={item} infoArr={infoArr} isFavorite={isFavorite} onFavorite={onFavorite} setIsFavorite={setIsFavorite}/>}
 
         <img src={item.image} alt={item.title} className={'rounded-t-xl h-[250px] object-cover'}
              onClick={()=>setShowModal(true)}/>
@@ -40,10 +40,12 @@ export function Meal({item, infoArr}){
                 <span>
                     <i className={(isFavorite?"fa-solid ":"fa-regular ") +"fa-heart text-red-600 mr-2.5 text-xl"}
                        onClick={()=>{
-                           clickHandler(item,infoArr)
+                           onFavorite(item,infoArr)
                            setIsFavorite(!isFavorite)
                        }}></i>
-                    <i className="fa-solid fa-cart-plus text-red-600 text-[18px]"></i>
+                    <i className="fa-solid fa-cart-plus text-red-600 text-[18px]"
+                       onClick={ item.type ?()=> setShowModal(true): () => addBasket(item, infoArr)}>
+                    </i>
                 </span>
             </div>
         </div>

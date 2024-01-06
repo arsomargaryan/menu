@@ -3396,7 +3396,7 @@
               "id": 237,
               "title": "Թաուկ",
               "price": 1100,
-              "image": "հավի կրծքամիս, կարտոֆիլի ֆրի, կաղամբ, հազար, կետչուպ, մայոնեզ",
+              "image": "https://menu.am/resources/default/img/restaurant_products/big/1678971317079-822.jpg",
               "composition": "հավի կրծքամիս, կարտոֆիլի ֆրի, կաղամբ, հազար, կետչուպ, մայոնեզ",
               "type": [
                 {
@@ -9541,65 +9541,6 @@
       ]
     }
   ],
-  "favorites": [
-    {
-      "id": 169,
-      "title": "Մինիբոն դասական",
-      "price": 1100,
-      "image": "https://menu.am/resources/default/img/restaurant_products/big/1677823971855-12.jpg",
-      "composition": "անուշաբույր ռոլ՝ լցոնված մեր լեգենդար Մակարա դարչինով, պատված թարմ պանրային սերուցքով",
-      "type": [
-        {
-          "typeName": "Հավելումներ",
-          "typeProducts": [
-            {
-              "product": "Սերուցքային Պանիր",
-              "price": 400
-            },
-            {
-              "product": "Նուտելլա",
-              "price": 400
-            },
-            {
-              "product": "Շոկոլադ",
-              "price": 400
-            },
-            {
-              "product": "Կարամել",
-              "price": 400
-            },
-            {
-              "product": "Ընկույզ",
-              "price": 400
-            },
-            {
-              "product": "Ջեմ",
-              "price": 400
-            },
-            {
-              "product": "Մեղր",
-              "price": 400
-            },
-            {
-              "product": "Գետնանուշի Կարագ",
-              "price": 400
-            },
-            {
-              "product": "Բանան",
-              "price": 200
-            },
-            {
-              "product": "M And Ms",
-              "price": 200
-            }
-          ]
-        }
-      ],
-      "logo": "h",
-      "name": "t",
-      "categoryAPI": "t",
-      "nameAPI": "p"
-    }
-  ],
+  "favorites": [],
   "basket": []
 }

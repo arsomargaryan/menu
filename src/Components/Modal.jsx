@@ -1,9 +1,21 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import AppContext from "../AppContext";
 
-export function Modal({setShowModal, item, infoArr, isFavorite, clickHandler , setIsFavorite, favModal}){
+export function Modal({setShowModal, item, infoArr, isFavorite, onFavorite , setIsFavorite, favModal}){
     const navigate = useNavigate()
+    const [comments, setComments] = useState({})
     const [count, setCount] = useState(1)
+    const {addBasket} = useContext(AppContext)
+
+    const changeHandler =(e)=>{
+        setComments({...comments, [e.target.name]: [e.target.value]})
+    }
+
+    const checkHandler = (e)=>{
+        setComments({...comments, [e.target.name]: [e.target.id]})
+    }
+
 
     return (
         <>
@@ -17,15 +29,14 @@ export function Modal({setShowModal, item, infoArr, isFavorite, clickHandler , s
                     </div>
                     <div className={'mr-5 mt-5'}>
                         {favModal?<i className={'fa solid fa-heart text-red-600 mr-2.5 text-xl cursor-pointer'}
-                                     onClick={()=>clickHandler(item, infoArr[0],infoArr[1])}></i>:
+                                     onClick={()=>onFavorite(item, infoArr[0],infoArr[1])}></i>:
                         <i className={(isFavorite?"fa-solid ":"fa-regular ") +"fa-heart text-red-600 mr-2.5 text-xl cursor-pointer"}
                         onClick={()=>{
-                            clickHandler(item, infoArr[0],infoArr[1])
+                            onFavorite(item, infoArr    )
                             setIsFavorite(!isFavorite)
                         }}></i>}
-                        <span
-                            className={'hover:bg-black hover:bg-opacity-10 rounded-full p-1 pl-1.5 pr-1.5 cursor-pointer'}><i
-                            className="fa-solid fa-xmark text-xl text-black/50" onClick={() => setShowModal(false)}></i></span>
+                        <span className={'hover:bg-black hover:bg-opacity-10 rounded-full p-1 pl-1.5 pr-1.5 cursor-pointer'}>
+                            <i className="fa-solid fa-xmark text-xl text-black/50" onClick={() => setShowModal(false)}></i></span>
                     </div>
                 </div>
                 <div className={'flex m-5 mb-0.5 pb-5'}>
@@ -35,13 +46,22 @@ export function Modal({setShowModal, item, infoArr, isFavorite, clickHandler , s
                             <div className={'text-xl font-bold text-black/75 pb-2'}>{item.title}</div>
                             <div className={'text-sm min-h-[230px] text-black/70 font-semibold'}>{item.composition}</div>
                         </div>
-                        <div className={'mt-2'}>
-                            <button className={'bg-gray-200 p-2 pt-0.5 pb-0.5 rounded-xl'}><i
-                                className="fa-solid fa-minus text-sm"></i></button>
+                        <div className={'mt-2 relative'}>
+                            <button className={'bg-gray-200 p-2 pt-0.5 pb-0.5 rounded-xl'}
+                                    onClick={()=>{
+                                        if(count === 1)
+                                        {
+                                            return count
+                                        }else {
+                                            setCount(prev=> prev-1)
+                                        }}}>
+                                <i className="fa-solid fa-minus text-sm"></i></button>
                             <span className={'ml-4 mr-4'}>{count}</span>
-                            <button className={'bg-gray-200 p-2 pt-0.5 pb-0.5 rounded-xl'}><i
+                            <button className={'bg-gray-200 p-2 pt-0.5 pb-0.5 rounded-xl'}
+                                    onClick={()=>setCount(prev=> prev+1)}><i
                                 className="fa-solid fa-plus text-sm"></i></button>
-                            <span className={'text-xl ml-3 text-black/80 font-semibold'}>{item.price}֏</span>
+                            <span className={'text-xl ml-3 text-black/80 font-semibold'}>{item.price * count}֏</span>
+                            {count > 1 ? <span className={'basket-container text-black/50 text-sm font-semibold absolute pl-1'}>{item.price}֏</span>: null}
                         </div>
                     </div>
                 </div>
@@ -50,8 +70,8 @@ export function Modal({setShowModal, item, infoArr, isFavorite, clickHandler , s
                                                      key={index}>
                         <div>{el.typeName}</div>
                         <div >{el.typeProducts.map((type, index) => <div className={'cursor-pointer'}>
-                                <label className={"radio mt-3"} htmlFor={type.product} key={index}>
-                                    <input type={'radio'} name={el.typeName} className={'cursor-pointer'} id={type.product}/>
+                                <label className={"radio mt-3"} htmlFor={type.product} key={index} >
+                                    <input type={'radio'} name={el.typeName} className={'cursor-pointer'} id={type.product} onChange={checkHandler} value={comments[type.product]}/>
                                     <span className={'text-black/70'}>{type.product}</span>
                                     <span className={"fake"}></span>
                                 </label>
@@ -59,10 +79,16 @@ export function Modal({setShowModal, item, infoArr, isFavorite, clickHandler , s
                         </div>
                     </div>) : ''}
                 <input type={"text"}
+                       name={'Մեկնաբանություն'}
+                       value={comments.comment}
                        className={' bg-gray-50 border-t border-t-gray-200 ml-5 mr-5 mt-4 w-[650px] h-[80px] outline-0 focus:border-t-red-500 text-sm p-3'}
-                       placeholder={"Պատվերի մեկնաբանություն"}/>
+                       placeholder={"Պատվերի մեկնաբանություն"}
+                       onChange={changeHandler}/>
                 <div className={'text-center'}>
-                    <button
+                    <button onClick={()=>{
+                        addBasket(item, infoArr, comments, count)
+                        setShowModal(false)
+                    }}
                         className={'mt-2 mr-8 mb-4 bg-red-600 rounded-xl h-11 text-white font-bold text-sm w-[430px]'}>
                         Ավելացնել Զամբյուղ
                     </button>

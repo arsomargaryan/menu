@@ -46,6 +46,7 @@ export function HomePage() {
     const searchFunc =(value)=>{
         const arr = restaurants.filter(el=> el.restaurantName.toLowerCase().includes(value.toLowerCase()))
         setFilteredBySearch(arr)
+        if(!value) setFilteredBySearch([])
 
     }
 

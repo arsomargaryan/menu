@@ -1,11 +1,18 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {ModalMaps} from "./ModalMaps";
+import {Basket} from "../BasketComponents/Basket";
+import AppContext from "../AppContext";
 
 
 export function Header(){
     const navigate =useNavigate()
     const [showModal, setShowModal] = useState(false)
+    const [showBasket, setShowBasket] = useState(false)
+    const {basket} = useContext(AppContext)
+
+    let quantity = basket.reduce((ac, cv) => ac + cv.quantity, 0)
+
 
 
     return <div className={'flex justify-between items-center pb-3 w-full fixed bg-white z-10 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]'}>
@@ -27,8 +34,11 @@ export function Header(){
             <button className={'mt-2 mr-8 pr-7 pl-7 bg-red-600 rounded-xl h-11 text-white font-bold text-sm'}
                     onClick={() => navigate('/auth-sign-up')}>Գրանցվել
             </button>
-            <button className={'mt-1 mr-8 bg-red-600 rounded-xl pr-5 pl-5 h-11 text-white'}>
+            {showBasket && <Basket showBasket={showBasket} setShowBasket={setShowBasket}/>}
+            <button className={'mt-1 mr-8 bg-red-600 rounded-xl pr-6  pl-6 h-11 text-white relative'}
+                    onClick={()=>setShowBasket(!showBasket)}>
                 <i className="fa-solid fa-basket-shopping"></i>
+                {quantity>0?<span className={'absolute rounded-full pl-1.5 pr-1.5 bg-white text-red-600 text-sm font-semibold right-1.5 bottom-1'}>{quantity}</span>:''}
             </button>
             <button onClick={()=>navigate('/favorites')}>
                 <i className="fa-regular fa-heart text-red-600 text-2xl cursor-pointer mr-8 "></i>

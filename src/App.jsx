@@ -23,42 +23,110 @@ import axios from "axios";
 export function App(){
     const location = useLocation();
     const [favorites, setFavorites] = useState([])
-    const meal=useRef(null)
-
-    useEffect(() => {
-        getFavorites()
-    }, []);
-        const getFavorites = async () =>{
-            const response = await axios.get("http://localhost:3000/favorites")
-            return setFavorites(response.data)
-        }
-
-    const clickHandler= async (item, infoArr)=>{
-            item = {...item, "logo": infoArr[0], "name": infoArr[1], "categoryAPI": infoArr[2], "nameAPI": infoArr[3]}
-            const favMeal = favorites.find(el=> el.id === item.id);
-            if(favMeal)
-            {
-                await axios.delete("http://localhost:3000/favorites/"+ favMeal.id)
-                const newFav = favorites.filter(el=> el.id !== item.id)
-                setFavorites(newFav)
-            }else {
-                const {data} = await axios.post("http://localhost:3000/favorites", item)
-                setFavorites(prev=>[...prev, data])
-            }
-        }
-
-
+    const [basket, setBasket] = useState([])
+    const [meal, setMeal] = useState([])
 
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
     }, [location.pathname]);
 
 
+    useEffect(() => {
+        getFavorites()
+        getBasket()
+    }, []);
+    const getFavorites = async () =>{
+        const response = await axios.get("http://localhost:3000/favorites")
+        return setFavorites(response.data)
+    }
+
+    const getBasket = async ()=>{
+        const response = await axios.get("http://localhost:3000/basket")
+        return setBasket(response.data)
+    }
+
+    const onFavorite= async (item, infoArr)=>{
+        item = {...item, "logo": infoArr[0], "name": infoArr[1], "categoryAPI": infoArr[2], "nameAPI": infoArr[3]}
+        const favMeal = favorites.find(el=> el.id === item.id);
+        if(favMeal)
+        {
+            await axios.delete("http://localhost:3000/favorites/"+ favMeal.id)
+            const newFav = favorites.filter(el=> el.id !== item.id)
+            setFavorites(newFav)
+        }else {
+            const {data} = await axios.post("http://localhost:3000/favorites", item)
+            setFavorites(prev=>[...prev, data])
+        }
+    }
+
+    const addBasket = async (item, infoArr, comments, count)=>{
+        const basketMeal = basket.find(el=> el.id === item.id);
+        if(!basketMeal){
+            item = {...item,
+                "logo": infoArr[0],
+                "name": infoArr[1],
+                "categoryAPI": infoArr[2],
+                "nameAPI": infoArr[3],
+                "quantity": count || 1,
+                "typeAndComm": comments
+            }
+            const {data} = await axios.post("http://localhost:3000/basket", item)
+            setBasket(prev=>[...prev, data])
+        }else{
+            count ? basketMeal.quantity = basketMeal.quantity + count: basketMeal.quantity = basketMeal.quantity + 1;
+            basketMeal.typeAndComm = {...basketMeal.typeAndComm, ...comments}
+            await axios.put("http://localhost:3000/basket/" + basketMeal.id, basketMeal)
+            setBasket([...basket])
+        }
+
+    }
+
+    const plus = async (item)=>{
+        item.quantity = item.quantity + 1;
+        const {data} = await axios.put("http://localhost:3000/basket/" + item.id, item)
+        setBasket([...basket])
+    }
+
+    const minus = async (item)=>{
+        item.quantity = item.quantity - 1;
+        if(item.quantity < 1){
+            await axios.delete("http://localhost:3000/basket/"+ item.id)
+            const newBasket = basket.filter(el=> el.id !== item.id)
+            setBasket(newBasket)
+        }else{
+            const {data} = await axios.put("http://localhost:3000/basket/" + item.id, item)
+            setBasket([...basket])
+        }
+    }
+
+    const deleteBasketItem = async (id)=>{
+        if(id === 'all'){
+
+        basket.map(async meal=>{
+            await axios.delete("http://localhost:3000/basket/"+ meal.id)
+        })
+        setBasket([])
+        }else{
+            await axios.delete("http://localhost:3000/basket/" + id)
+            const newBasket = basket.filter(el=> el.id !== id)
+            setBasket(newBasket)
+        }
+
+    }
+
+
+
+
+
     return <div className={'App mx-auto  flex-col '}>
         <AppContext.Provider value={{
             favorites,
-            setFavorites,
-            clickHandler
+            onFavorite,
+            basket,
+            addBasket,
+            plus,
+            minus,
+            deleteBasketItem
         }}>
             <Routes>
                 <Route element={<Content/>}>
